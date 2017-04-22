@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from archive import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^snippet/create/$', views.SnippetCreate.as_view(), name='create-snippet'),
+    url(r'^snippet/update/(?P<pk>[\w-]+)/$', views.SnippetUpdate.as_view(), name='update-snippet'),
+    url(r'^snippet/delete/(?P<pk>[\w-]+)/$', views.SnippetDelete.as_view(), name='delete-snippet'),
+    url(r'^$', views.SnippetList.as_view(), name='list-snippet'),
+    url(r'^snippet/detail/(?P<pk>[\w-]+)/$', views.SnippetDetail.as_view(), name='detail-snippet'),
 ]
