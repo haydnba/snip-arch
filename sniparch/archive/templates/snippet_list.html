@@ -1,0 +1,9 @@
+<h1>Snippet List</h1>
+
+{% for snippet in object_list %}
+  <a href="{% url 'detail-snippet' snippet.pk %}">
+    {{ snippet.question }}
+  </a>
+{% endfor %}
+
+<a href="{% url 'create-snippet' %}">Create New</a>
