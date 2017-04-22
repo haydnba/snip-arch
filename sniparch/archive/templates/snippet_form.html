@@ -1,26 +1,12 @@
-{% extends "base.html" %}
-
-{% block title %}
-{{ block.super }} - New Snippet
-{% endblock %}
-
 {% block content %}
-  <form
-      action=""
-      method="post">
-    {% csrf_token %}
+  <form action="" method="post" target="blank">
+    <!-- {% csrf_token %} -->
     <p>
-      <label for="query_id">Query</label>
-        <input id="query_id" maxlength="511" name="query" type="text">
+      <label for="snippet_id">Paste code snippet here:</label>
+        <input id="snippet_id" maxlength="2047" name="snippet" type="text" placeholder="">
     </p>
-    <p>
-      <label for="snippet_id">Snippet</label>
-        <input id="snippet_id" maxlength="2047" name="snippet" type="">
-    </p>
-    <p>
-      <label for="tag_id">Tag</label>
-        <input id="tag_id" maxlength="31" name="tag" type="">
-    </p>
+    <input id="query_id" maxlength="511" name="query" type="hidden" value="">
+    <input id="tag_id" maxlength="31" name="tag" type="hidden" value="">
     <button type="submit">
       Create Snippet</button>
   </form>

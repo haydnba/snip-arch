@@ -2,7 +2,22 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from .forms import SnippetForm
 from .models import Query, Tag, Snippet
-from django.views.generic import CreateView, UpdateView, ListView, DeleteView, DetailView
+from django.views.generic import TemplateView, CreateView, UpdateView, ListView, DeleteView, DetailView
+
+
+class IndexPage(TemplateView):
+    template_name = "index.html"
+
+    #  def get_context_data(self, **kwargs):
+    #     context = super(HomePageView, self).get_context_data(**kwargs)
+    #     context['latest_articles'] = Article.objects.all()[:5]
+    #     return context
+
+
+# class NewQuery(CreateView):
+#     model = Query
+#     form_class = QueryForm
+#     template_name = "query_form.html"
 
 
 class SnippetCreate(CreateView):

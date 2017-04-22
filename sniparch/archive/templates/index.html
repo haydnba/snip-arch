@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ block.super }} - Home
+{% endblock %}
+
+{% block content %}
+
+  <div>
+    {% include "query_form.html" %}
+  </div>
+  <div>
+    {% include "snippet_form.html" %}
+  </div>
+  <div>
+    {% include "snippet_list.html" %}
+  </div>
+
+{% endblock %}

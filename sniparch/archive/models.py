@@ -3,10 +3,11 @@ from django.db import models
 
 
 class Query(models.Model):
-    content = models.CharField(max_length=511)
+    query_string = models.CharField(max_length=511)
+    # search_date = models.DateField()
 
     def __str__(self):
-        return self.content
+        return self.query_string
 
 
 class Tag(models.Model):
@@ -14,6 +15,9 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name.title()
+
+    # class Meta():
+    #     ordering = ['']
 
 
 class Snippet(models.Model):
@@ -23,5 +27,10 @@ class Snippet(models.Model):
     query = models.ForeignKey(Query)
     tags = models.ManyToManyField(Tag)
 
+    # class Meta():
+    #     ordering = ['']
+
     def __str__(self):
-        return "Response to query: '{}' on date: {}.".format(self.query, self.updated.strftime('%Y-%m-%d'))
+        return "Response to query: '{}', on date: {}.".format(
+            self.query, self.updated.strftime('%Y-%m-%d')
+        )

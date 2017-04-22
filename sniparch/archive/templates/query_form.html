@@ -1,0 +1,10 @@
+{% block content %}
+  <form action="" method="post">
+    {% csrf_token %}
+    <p>
+      <label for="query_id">Query:</label>
+        <input id="query_id" maxlength="511" name="q" type="search">
+    </p>
+    <button type="submit">Submit Query</button>
+  </form>
+{% endblock %}
