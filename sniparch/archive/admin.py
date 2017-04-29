@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Query, Tag, Snippet
+
+
+admin.site.register(Query)
+admin.site.register(Tag)
+admin.site.register(Snippet)
