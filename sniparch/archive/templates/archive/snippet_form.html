@@ -1,13 +1,15 @@
 {% block content %}
-  <form action="" method="post" target="blank">
-    <!-- {% csrf_token %} -->
-    <p>
-      <label for="snippet_id">Paste code snippet here:</label>
-        <input id="snippet_id" maxlength="2047" name="snippet" type="text" placeholder="">
-    </p>
-    <input id="query_id" maxlength="511" name="query" type="hidden" value="">
-    <input id="tag_id" maxlength="31" name="tag" type="hidden" value="">
-    <button type="submit">
-      Create Snippet</button>
-  </form>
+
+  <div>
+    <div>
+      <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">
+          Save Snippet
+        </button>
+      </form>
+    </div>
+  </div>
+
 {% endblock %}

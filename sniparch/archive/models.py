@@ -39,25 +39,25 @@ class Tag(models.Model):
             kwargs={'slug': self.slug}
         )
 
-    def make_slug(self):
-        self.slug = "-".join(self.cleaned_data['name'].lower().split())
+    # def set_slug(self):
+    #     self.slug = "-".join(self.cleaned_data['name'].lower().split())
 
 
 class Snippet(models.Model):
     question = models.ForeignKey(Query)
     answer = models.CharField(max_length=2047)
-    source = models.URLField(max_length=255)
+    source = models.URLField(max_length=255, blank=True)
     created = models.DateTimeField('Date Created', auto_now_add=True)
     updated = models.DateTimeField('Last Modified', auto_now=True)
-    slug = models.SlugField()
-    tags = models.ManyToManyField(Tag)
+    # slug = models.SlugField()
+    tags = models.ManyToManyField(Tag, related_name='snippets')
 
     class Meta:
         ordering = ['-updated']
 
     def __str__(self):
         return "Response to query: '{}', on date: {}.".format(
-            self.query, self.updated.strftime('%Y-%m-%d')
+            self.question, self.updated.strftime('%Y-%m-%d')
         )
 
     def get_absolute_url(self):

@@ -1,8 +1,17 @@
+{% block content %}
 
-{% for snippet in object_list %}
-  <a href="{% url 'detail-snippet' snippet.pk %}">
-    {{ snippet.content }}
-  </a>
-{% endfor %}
+  <h2>Snippet List</h2>
 
-<!-- <a href="{% url 'create-snippet' %}">Create New</a> -->
+  <ul>
+    {% for snippet in snippet_list %}
+      <li><a href="">
+        {{ snippet.answer }}
+        {{ snippet.source }}
+        {{ snippet.updated|date:"SHORT_DATE_FORMAT" }}
+      </a></li>
+    {% empty %}
+      <li>No Snippets Exist.</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

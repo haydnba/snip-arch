@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+
 from .models import Query, Tag, Snippet
 
 
@@ -11,10 +12,10 @@ class QueryForm(ModelForm):
 class TagForm(ModelForm):
     class Meta:
         model = Tag
-        fields = '__all__'
+        fields = ['name']
 
 
 class SnippetForm(ModelForm):
     class Meta:
         model = Snippet
-        fields = '__all__'
+        exclude = ['question']

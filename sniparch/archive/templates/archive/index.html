@@ -1,19 +1,48 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ block.super }} - Home
+{{ block.super }} - Index
 {% endblock %}
 
 {% block content %}
 
+<ul>
+  {% for tag in tag_list %}
+    <li><a href="">
+      {{ tag.name|title }}
+    </a></li>
+  {% empty %}
+    <li>No tags exist.</li>
+  {% endfor %}
+</ul>
+
+<hr>
+
+<div>
   <div>
-    {% include "query_form.html" %}
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">
+        Search
+      </button>
+    </form>
   </div>
-  <div>
-    {% include "snippet_form.html" %}
-  </div>
-  <div>
-    {% include "snippet_list.html" %}
-  </div>
+</div>
+
+<hr>
+
+<ul>
+  {% for snippet in snippet_list %}
+    <li><a href="">
+      {{ snippet.answer }}
+      {{ snippet.source }}
+      {{ snippet.updated|date:"SHORT_DATE_FORMAT" }}
+    </a></li>
+  {% empty %}
+    <li>No Snippets Exist.</li>
+  {% endfor %}
+</ul>
+
 
 {% endblock %}

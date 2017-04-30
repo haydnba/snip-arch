@@ -13,16 +13,42 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from archive import views
 
+
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^index/$', views.IndexPage.as_view(), name='index-page'),
-    url(r'^snippet/list/$', views.SnippetList.as_view(), name='list-snippet'),
-    url(r'^snippet/create/$', views.SnippetCreate.as_view(), name='create-snippet'),
-    url(r'^snippet/update/(?P<pk>[\w-]+)/$', views.SnippetUpdate.as_view(), name='update-snippet'),
-    url(r'^snippet/delete/(?P<pk>[\w-]+)/$', views.SnippetDelete.as_view(), name='delete-snippet'),
-    url(r'^snippet/detail/(?P<pk>[\w-]+)/$', views.SnippetDetail.as_view(), name='detail-snippet'),
+    url(r'^admin/',
+        admin.site.urls),
+    url(r'^index/',
+        views.IndexPage.as_view(),
+        name = 'index'),
+    url(r'^query/list/$',
+        views.QueryList.as_view(),
+        name='list_query'),
+    url(r'^query/create/$',
+        views.QueryCreate.as_view(),
+        name='create_query'),
+    url(r'^tag/list/$',
+        views.TagList.as_view(),
+        name='list_tag'),
+    url(r'^tag/create/$',
+        views.TagCreate.as_view(),
+        name='create_tag'),
+    url(r'^snippet/list/$',
+        views.SnippetList.as_view(),
+        name='list_snippet'),
+    url(r'^snippet/create/$',
+        views.SnippetCreate.as_view(),
+        name='create_snippet'),
+    # url(r'^snippet/update/(?P<pk>[\w-]+)/$',
+    #     views.SnippetUpdate.as_view(),
+    #     name='update_snippet'),
+    # url(r'^snippet/delete/(?P<pk>[\w-]+)/$',
+    #     views.SnippetDelete.as_view(),
+    #     name='delete_snippet'),
+    # url(r'^snippet/detail/(?P<pk>[\w-]+)/$',
+    #     views.SnippetDetail.as_view(),
+    #     name='detail_snippet'),
 ]

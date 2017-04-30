@@ -1,47 +1,66 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from .forms import SnippetForm
-from .models import Query, Tag, Snippet
 from django.views.generic import TemplateView, CreateView, UpdateView, ListView, DeleteView, DetailView
 
-
-class IndexPage(TemplateView):
-    template_name = "index.html"
-
-    #  def get_context_data(self, **kwargs):
-    #     context = super(HomePageView, self).get_context_data(**kwargs)
-    #     context['latest_articles'] = Article.objects.all()[:5]
-    #     return context
+from .forms import QueryForm, TagForm, SnippetForm
+from .models import Query, Tag, Snippet
 
 
-# class NewQuery(CreateView):
-#     model = Query
-#     form_class = QueryForm
-#     template_name = "query_form.html"
+class IndexPage(CreateView):
+    model = Query
+    form_class = QueryForm
+    template_name = 'archive/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexPage, self).get_context_data(**kwargs)
+        context['tag_list'] = Tag.objects.all()
+        context['snippet_list'] = Snippet.objects.all()
+        return context
+
+class QueryCreate(CreateView):
+    model = Query
+    form_class = QueryForm
+    template_name = 'archive/query_form.html'
+
+
+class QueryList(ListView):
+    model = Query
+    template_name = 'archive/query_list.html'
+
+
+class TagCreate(CreateView):
+    model = Tag
+    form_class = TagForm
+    template_name = 'archive/tag_form.html'
+
+
+class TagList(ListView):
+    model = Tag
+    template_name = 'archive/tag_list.html'
 
 
 class SnippetCreate(CreateView):
     model = Snippet
     form_class = SnippetForm
-    template_name = "snippet_form.html"
+    template_name = 'archive/snippet_form.html'
 
 
-class SnippetUpdate(UpdateView):
-    model = Snippet
-    form_class = SnippetForm
-    template_name = "snippet_form.html"
-
-
-class SnippetDelete(DeleteView):
-    model = Snippet
-    success_url = reverse_lazy('snippet-list')
+# class SnippetUpdate(UpdateView):
+#     model = Snippet
+#     form_class = SnippetForm
+#     template_name = 'archive/snippet_form.html'
+#
+#
+# class SnippetDelete(DeleteView):
+#     model = Snippet
+#     success_url = reverse_lazy('snippet-list')
 
 
 class SnippetList(ListView):
     model = Snippet
-    template_name = "snippet_list.html"
+    template_name = 'archive/snippet_list.html'
 
 
-class SnippetDetail(DetailView):
-    model = Snippet
-    template_name = "snippet_detail.html"
+# class SnippetDetail(DetailView):
+#     model = Snippet
+#     template_name = 'archive/snippet_detail.html'
